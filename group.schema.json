@@ -1,0 +1,51 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/MisterYisme/MisterY-s-Bounties-Hytale-Issue-Report/refs/heads/master/group.schema.json",
+    "title": "MisterY's Bounties for Hytale Group Template",
+    "description": "Schema for groups used by the Hytale MisterYs Bounty Mod.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "$schema",
+        "id",
+        "entries"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,63}$"
+        },
+        "entries": {
+            "type": "array",
+            "$ref": "#/$defs/entry"
+        }
+    },
+    "$defs": {
+        "entry": {
+            "type": "object",
+            "required": [
+                "id",
+                "rarity"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[A-Z][a-z]"
+                },
+                "rarity": {
+                    "type": "string",
+                    "enum": [
+                        "COMMON",
+                        "UNCOMMON",
+                        "RARE",
+                        "EPIC",
+                        "UNIQUE"
+                    ]
+                }
+            }
+        }
+    }
+}
