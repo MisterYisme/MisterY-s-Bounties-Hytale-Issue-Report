@@ -1,0 +1,289 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hytale-bounty/bounty.schema.json",
+  "title": "Hytale Bounty Template",
+  "description": "Schema for bounty templates used by the Hytale MisterYs Bounty Mod.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "enabled",
+    "display",
+    "classification",
+    "objectives",
+    "rewards"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "display": {
+      "$ref": "#/$defs/display"
+    },
+    "classification": {
+      "$ref": "#/$defs/classification"
+    },
+    "availability": {
+      "$ref": "#/$defs/availability"
+    },
+    "objectives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/objective"
+      }
+    },
+    "rewards": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/reward"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,63}$"
+    },
+    "display": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "description"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "icon": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "difficulty", "weight"],
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": [
+            "HUNT",
+            "COLLECTION",
+            "DELIVERY",
+            "EXPLORATION",
+            "ELIMINATION"
+          ]
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": [
+            "EASY",
+            "NORMAL",
+            "HARD",
+            "ELITE",
+            "LEGENDARY"
+          ]
+        },
+        "weight": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          }
+        }
+      }
+    },
+    "availability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minPlayerLevel": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxCompletions": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "Maximum completions per player; 0 means unlimited."
+        },
+        "cooldownSeconds": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        }
+      }
+    },
+    "objective": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/killEntityObjective"
+        },
+        {
+          "$ref": "#/$defs/eliminateTargetObjective"
+        },
+        {
+          "$ref": "#/$defs/collectItemObjective"
+        }
+      ]
+    },
+    "killEntityObjective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "target",
+        "requiredAmount"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "KILL_ENTITY"
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["entityId"],
+          "properties": {
+            "entityId": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "requiredAmount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      }
+    },
+    "eliminateTargetObjective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "target",
+        "requiredAmount"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "ELIMINATE_TARGET"
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["entityId"],
+          "properties": {
+            "entityId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "targetKey": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "requiredAmount": {
+          "const": 1
+        }
+      }
+    },
+    "collectItemObjective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "target",
+        "requiredAmount"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "COLLECT_ITEM"
+        },
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["itemId"],
+          "properties": {
+            "itemId": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "requiredAmount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      }
+    },
+    "reward": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/itemReward"
+        }
+      ]
+    },
+    "itemReward": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "itemId",
+        "amount"
+      ],
+      "properties": {
+        "type": {
+          "const": "ITEM"
+        },
+        "itemId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        }
+      }
+    }
+  }
+}
