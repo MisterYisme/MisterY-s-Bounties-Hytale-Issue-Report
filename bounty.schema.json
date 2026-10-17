@@ -1,7 +1,7 @@
 
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/hytale-bounty/bounty.schema.json",
+  "$id": "https://raw.githubusercontent.com/MisterYisme/MisterY-s-Bounties-Hytale-Issue-Report/refs/heads/master/bounty.schema.json",
   "title": "Hytale Bounty Template",
   "description": "Schema for bounty templates used by the Hytale MisterYs Bounty Mod.",
   "type": "object",
