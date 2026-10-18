@@ -16,39 +16,34 @@
         },
         "id": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_]{1,63}$"
+            "pattern": "[a-z]+:[a-z]+"
         },
         "entries": {
             "type": "array",
             "items": {
-                "$ref": "#/$defs/entry"
+                "type": "object",
+                "required": [
+                    "id",
+                    "rarity"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "pattern": "^[A-Z][a-z]"
+                    },
+                    "rarity": {
+                        "type": "string",
+                        "enum": [
+                            "COMMON",
+                            "UNCOMMON",
+                            "RARE",
+                            "EPIC",
+                            "UNIQUE"
+                        ]
+                    }
+                }
             },
             "minItems": 1
-        }
-    },
-    "$defs": {
-        "entry": {
-            "type": "object",
-            "required": [
-                "id",
-                "rarity"
-            ],
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "pattern": "^[A-Z][a-z]"
-                },
-                "rarity": {
-                    "type": "string",
-                    "enum": [
-                        "COMMON",
-                        "UNCOMMON",
-                        "RARE",
-                        "EPIC",
-                        "UNIQUE"
-                    ]
-                }
-            }
         }
     }
 }
