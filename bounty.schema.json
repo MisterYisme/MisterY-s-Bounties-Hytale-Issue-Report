@@ -68,6 +68,42 @@
           }
         }
       ]
+    },
+    "reward": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "JSON file containing a list of IDs"
+        },
+        "id": {
+          "type": "string",
+          "description": "A unique ID"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "group"
+          ],
+          "not": {
+            "required": [
+              "id"
+            ]
+          }
+        },
+        {
+          "required": [
+            "id"
+          ],
+          "not": {
+            "required": [
+              "group"
+            ]
+          }
+        }
+      ]
     }
   }
 }
