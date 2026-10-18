@@ -53,7 +53,7 @@
           ],
           "not": {
             "required": [
-              "group"
+              "id"
             ]
           }
         },
