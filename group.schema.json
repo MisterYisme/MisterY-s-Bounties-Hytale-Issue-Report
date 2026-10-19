@@ -7,31 +7,31 @@
     "additionalProperties": false,
     "required": [
         "$schema",
-        "id",
-        "entries"
+        "Id",
+        "Entries"
     ],
     "properties": {
         "$schema": {
             "type": "string"
         },
-        "id": {
+        "Id": {
             "type": "string",
             "pattern": "[a-z]+:[a-z]+"
         },
-        "entries": {
+        "Entries": {
             "type": "array",
             "items": {
                 "type": "object",
                 "required": [
-                    "id",
-                    "rarity"
+                    "Id",
+                    "Rarity"
                 ],
                 "properties": {
-                    "id": {
+                    "Id": {
                         "type": "string",
                         "pattern": "^[A-Z][a-z]"
                     },
-                    "rarity": {
+                    "Rarity": {
                         "type": "string",
                         "enum": [
                             "COMMON",

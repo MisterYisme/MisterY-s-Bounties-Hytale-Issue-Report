@@ -7,10 +7,10 @@
   "additionalProperties": false,
   "required": [
     "$schema",
-    "id",
-    "type",
-    "objective",
-    "reward"
+    "Id",
+    "Type",
+    "Objective",
+    "Reward"
   ],
   "properties": {
     "$schema": {
@@ -18,12 +18,12 @@
       "description": "The schema to verify this document against.",
       "format": "uri"
     },
-    "id": {
+    "Id": {
       "type": "string",
       "description": "An unique identifier for the bounty.",
       "pattern": "[a-z]+:[a-z]+"
     },
-    "type": {
+    "Type": {
       "type": "string",
       "description": "A defining value to correctly process the bounty",
       "enum": [
@@ -33,15 +33,15 @@
         "TRAVEL"
       ]
     },
-    "objective": {
+    "Objective": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "group": {
+        "Group": {
           "type": "string",
           "description": "JSON file containing a list of IDs"
         },
-        "id": {
+        "Id": {
           "type": "string",
           "description": "A unique ID"
         }
@@ -49,35 +49,35 @@
       "oneOf": [
         {
           "required": [
-            "group"
+            "Group"
           ],
           "not": {
             "required": [
-              "id"
+              "Id"
             ]
           }
         },
         {
           "required": [
-            "id"
+            "Id"
           ],
           "not": {
             "required": [
-              "group"
+              "Group"
             ]
           }
         }
       ]
     },
-    "reward": {
+    "Reward": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "group": {
+        "Group": {
           "type": "string",
           "description": "JSON file containing a list of IDs"
         },
-        "id": {
+        "Id": {
           "type": "string",
           "description": "A unique ID"
         }
@@ -85,21 +85,21 @@
       "oneOf": [
         {
           "required": [
-            "group"
+            "Group"
           ],
           "not": {
             "required": [
-              "id"
+              "Id"
             ]
           }
         },
         {
           "required": [
-            "id"
+            "Id"
           ],
           "not": {
             "required": [
-              "group"
+              "Group"
             ]
           }
         }
